@@ -61,3 +61,13 @@ In conclusion, the development of this web-based system represents an opportunit
 *Keywords:* web system, administrative management, gym, membership control, attendance control, process automation, decision making, information systems
 
 ---
+
+## ⚠️ Realidad Problemática
+
+Desde el inicio de sus actividades, el gimnasio STRKE ha gestionado sus procesos administrativos de forma manual, lo que ha generado diversas dificultades en el control y organización de la información. Esta forma de trabajo tradicional provoca inconsistencias en el registro de usuarios, membresías, pagos y asistencia, así como errores humanos que afectan la exactitud de los datos.
+
+Como consecuencia, en múltiples ocasiones se presentan desorganización en la gestión de membresías, falta de control en los pagos y dificultades en el seguimiento de la asistencia de los clientes, lo que impacta negativamente en la eficiencia operativa y en la calidad del servicio brindado. Asimismo, el uso de métodos manuales demanda mayor tiempo y esfuerzo por parte del personal, dificultando la toma de decisiones oportunas.
+
+Ante la presente situación, se hace evidente la necesidad de implementar una solución tecnológica que permita automatizar los procesos, mejorar el control de la información y optimizar la gestión del gimnasio.
+
+---
