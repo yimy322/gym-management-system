@@ -21,3 +21,15 @@ Universidad Tecnológica del Perú (UTP)
 - **Fecha de finalización:** Julio 2026  
 
 ---
+
+## 🙏 Agradecimientos
+
+El presente trabajo nos gustaría agradecer a nuestro docente; José Luis Milla Flores, por su orientación y enseñanza durante el curso, así como a los integrantes del equipo, por su esfuerzo, dedicación y compromiso académico. 
+
+---
+
+## 🎁 Dedicatoria
+
+A nuestras familias, por su apoyo incondicional y constante motivación durante nuestra formación académica. A todas las personas que creyeron en nuestras capacidades y nos impulsaron a alcanzar nuestras metas.
+
+---
