@@ -81,3 +81,18 @@ Este proyecto es relevante porque demuestra cómo la implementación de herramie
 Por lo tanto, el presente proyecto justifica su desarrollo en la necesidad de contar con una solución tecnológica moderna y funcional que permita gestionar la información de manera confiable, centralizada y accesible, contribuyendo a mejorar la eficiencia operativa y la calidad del servicio brindado a los clientes del gimnasio STRKE.
 
 ---
+
+## 🎯 Objetivos
+
+### ✅ Objetivo General
+
+- Desarrollar un sistema web que permita gestionar de manera eficiente las operaciones del gimnasio STRKE, incluyendo el registro de usuarios, control de membresías, gestión de pagos y asistencia.
+
+### ✅ Objetivos Específicos
+
+- Analizar los requerimientos del sistema para identificar las necesidades del gimnasio STRKE.  
+- Diseñar la estructura del sistema web utilizando Spring Boot, Thymeleaf, Bootstrap y MySQL.  
+- Implementar los módulos de gestión de usuarios, membresías, pagos y control de asistencia.  
+- Validar el funcionamiento del sistema mediante pruebas funcionales en los diferentes módulos desarrollados.
+
+---
