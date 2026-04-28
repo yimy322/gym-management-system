@@ -71,3 +71,13 @@ Como consecuencia, en múltiples ocasiones se presentan desorganización en la g
 Ante la presente situación, se hace evidente la necesidad de implementar una solución tecnológica que permita automatizar los procesos, mejorar el control de la información y optimizar la gestión del gimnasio.
 
 ---
+
+## 🎯 Justificación
+
+El desarrollo de un sistema web de gestión integral para el gimnasio STRKE contribuye a mejorar los procesos administrativos al automatizar tareas como el registro de usuarios, la gestión de membresías, el control de pagos y el seguimiento de la asistencia. Además, permite reducir errores manuales, agilizar el trabajo del personal y facilitar una administración más ordenada y precisa de la información.
+
+Este proyecto es relevante porque demuestra cómo la implementación de herramientas tecnológicas puede optimizar el funcionamiento interno de un gimnasio, mejorar la organización de los datos y fortalecer la toma de decisiones. Asimismo, se emplean tecnologías como Spring Boot, MySQL, Bootstrap y Thymeleaf, las cuales permiten desarrollar una aplicación web funcional, dinámica y accesible para los usuarios. De igual manera, el uso de GitHub facilita la gestión del proyecto mediante control de versiones y trabajo colaborativo.
+
+Por lo tanto, el presente proyecto justifica su desarrollo en la necesidad de contar con una solución tecnológica moderna y funcional que permita gestionar la información de manera confiable, centralizada y accesible, contribuyendo a mejorar la eficiencia operativa y la calidad del servicio brindado a los clientes del gimnasio STRKE.
+
+---
