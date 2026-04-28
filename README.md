@@ -96,3 +96,68 @@ Por lo tanto, el presente proyecto justifica su desarrollo en la necesidad de co
 - Validar el funcionamiento del sistema mediante pruebas funcionales en los diferentes módulos desarrollados.
 
 ---
+
+## 📚 Marco Teórico
+
+El desarrollo de sistemas web de gestión administrativa ha sido abordado en diversos estudios, los cuales evidencian que la implementación de soluciones tecnológicas permite optimizar procesos, mejorar el control de la información y facilitar la toma de decisiones dentro de las organizaciones.
+
+1. Antecedentes  
+Para la realización del presente proyecto, se consideraron diversos trabajos previos relacionados con el desarrollo de sistemas web de gestión administrativa. Estas investigaciones permiten conocer diferentes enfoques aplicados en la gestión de usuarios, control de membresías, pagos y asistencia.
+
+En el contexto internacional, la tesis titulada “Aplicación web para mejorar la gestión administrativa del departamento de vinculación de la Universidad Estatal de Bolívar” tuvo como finalidad optimizar la gestión de información mediante la implementación de un sistema web, logrando mejorar la organización y facilitar la toma de decisiones (Pachala Guzmán, 2015).
+
+En el ámbito nacional, la investigación “Implementación de un sistema web para mejorar la gestión de ventas en la empresa Easy Construction Cr S.A.C.” evidenció que la automatización de procesos permite mejorar el control de clientes, inventarios y operaciones, optimizando la eficiencia organizacional (Uceda Gutiérrez, 2025).
+
+Estos antecedentes sirven como base para el desarrollo del sistema web del gimnasio STRKE, orientado a mejorar la gestión administrativa.
+
+2. Bases Teóricas  
+El uso de sistemas web en la gestión administrativa se ha convertido en una necesidad fundamental, ya que permite optimizar procesos, reducir errores y mejorar el acceso a la información.
+
+**Sistema Web:**  
+Un sistema web es una aplicación que se ejecuta en un navegador y permite a los usuarios acceder, procesar y gestionar información a través de internet (Crea System, 2022). En este proyecto, permitirá administrar la información del gimnasio STRKE de manera eficiente.
+
+**Sistema de Gestión:**  
+Un sistema de gestión es un conjunto de herramientas que permite organizar y controlar los procesos dentro de una organización, mejorando la eficiencia de sus operaciones.
+
+**Tecnologías utilizadas:**  
+- Java: lenguaje de programación orientado a objetos.  
+- Spring Boot: framework para el desarrollo del backend.  
+- MySQL: sistema de base de datos.  
+- Thymeleaf: motor de plantillas.  
+- Bootstrap: framework de diseño web.  
+
+3. Control de Versiones (Git)  
+El control de versiones permite registrar y gestionar los cambios realizados en un proyecto de software, facilitando el trabajo colaborativo.
+
+4. Plataforma de Desarrollo (GitHub)  
+GitHub es una plataforma de desarrollo colaborativo que permite almacenar, gestionar y versionar proyectos, facilitando el trabajo en equipo.
+
+---
+
+## ⚙️ Metodología
+
+El presente proyecto corresponde a una investigación de tipo aplicada, ya que tiene como finalidad desarrollar una solución tecnológica orientada a mejorar la gestión administrativa del gimnasio STRKE.
+
+1. Tipo de investigación  
+Se trata de una investigación aplicada, orientada a resolver un problema real mediante el desarrollo de un sistema web.
+
+2. Enfoque  
+Se adopta un enfoque práctico, centrado en la implementación de una solución tecnológica funcional.
+
+3. Metodología de desarrollo  
+El desarrollo del sistema se realizará mediante un enfoque incremental, permitiendo implementar el sistema por módulos:
+
+- Gestión de usuarios  
+- Control de membresías  
+- Gestión de pagos  
+- Control de asistencia  
+
+4. Etapas del desarrollo  
+
+- **Análisis:** Identificación de los requerimientos del sistema.  
+- **Diseño:** Definición de la arquitectura y base de datos.  
+- **Implementación:** Desarrollo del sistema utilizando las tecnologías seleccionadas.  
+- **Pruebas:** Validación del funcionamiento del sistema.  
+
+5. Validación  
+El sistema será validado verificando que permita gestionar la información del gimnasio de manera eficiente, organizada y accesible, cumpliendo con los objetivos planteados.
