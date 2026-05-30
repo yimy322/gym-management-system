@@ -1,11 +1,359 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Control de asistencia de afiliados del gimnasio">
+
+    <meta name="author"
+          content="Sistema Gym">
+
+    <title>
+        Control de Asistencia | Sistema Gym
+    </title>
+
+    <!-- Bootstrap Local -->
+
+    <link rel="stylesheet"
+          th:href="@{/css/bootstrap.min.css}">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+          integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+
 </head>
-<body>
-    <h1>Lista Miembros</h1>
+
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+
+        <div class="container-fluid">
+
+            <a class="navbar-brand fw-bold"
+               th:href="@{/}">
+
+                <i class="fa-solid fa-dumbbell me-2"></i>
+
+                Gym System
+
+            </a>
+
+            <span class="text-white">
+
+                <i class="fa-solid fa-user me-1"></i>
+
+                Administrador
+
+            </span>
+
+        </div>
+
+    </nav>
+
+    <!-- CONTENIDO -->
+
+    <main class="container py-4">
+
+        <div class="card shadow">
+
+            <!-- HEADER -->
+
+            <div class="card-header bg-primary text-white">
+
+                <h3 class="mb-0">
+
+                    <i class="fa-solid fa-clipboard-check me-2"></i>
+
+                    Control de Asistencia
+
+                </h3>
+
+            </div>
+
+            <div class="card-body">
+
+                <!-- BUSCADOR -->
+
+                <div class="row g-3 mb-4">
+
+                    <div class="col-12 col-md-9">
+
+                        <label class="form-label fw-semibold">
+
+                            DNI del Afiliado
+
+                        </label>
+
+                        <input type="text"
+                               class="form-control form-control-lg"
+                               maxlength="8"
+                               placeholder="Ingrese DNI">
+
+                    </div>
+
+                    <div class="col-12 col-md-3 d-grid align-self-end">
+
+                        <button type="button"
+                                class="btn btn-primary btn-lg">
+
+                            <i class="fa-solid fa-magnifying-glass me-2"></i>
+
+                            Buscar
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- AFILIADO -->
+
+                <div class="card shadow-sm mb-4">
+
+                    <div class="card-body">
+
+                        <h4 class="fw-bold">
+
+                            Juan Pérez Gómez
+
+                        </h4>
+
+                        <p class="text-muted mb-0">
+
+                            <i class="fa-solid fa-id-card me-2"></i>
+
+                            DNI: 12345678
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- MEMBRESÍA -->
+
+                <div class="card shadow-sm mb-4">
+
+                    <div class="card-body">
+
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-3">
+
+                            <h5 class="mb-0">
+
+                                <i class="fa-solid fa-credit-card me-2"></i>
+
+                                Estado de Membresía
+
+                            </h5>
+
+                            <span class="badge bg-success fs-6">
+
+                                ACTIVA
+
+                            </span>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-12 col-md-4 mb-3">
+
+                                <strong>
+
+                                    Fecha Inicio
+
+                                </strong>
+
+                                <br>
+
+                                01/05/2025
+
+                            </div>
+
+                            <div class="col-12 col-md-4 mb-3">
+
+                                <strong>
+
+                                    Fecha Fin
+
+                                </strong>
+
+                                <br>
+
+                                31/05/2025
+
+                            </div>
+
+                            <div class="col-12 col-md-4 mb-3">
+
+                                <strong>
+
+                                    Monto Pagado
+
+                                </strong>
+
+                                <br>
+
+                                S/. 80.00
+
+                            </div>
+
+                        </div>
+
+                        <label class="form-label fw-semibold">
+
+                            Vigencia de Membresía
+
+                        </label>
+
+                        <div class="progress">
+
+                            <div class="progress-bar bg-success"
+                                 role="progressbar"
+                                 style="width:70%;">
+
+                                70%
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- HISTORIAL -->
+
+                <div class="card shadow-sm mb-4">
+
+                    <div class="card-header">
+
+                        <h5 class="mb-0">
+
+                            <i class="fa-solid fa-calendar-check me-2"></i>
+
+                            Últimas Asistencias
+
+                        </h5>
+
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item">
+
+                            <i class="fa-solid fa-circle-check text-success me-2"></i>
+
+                            25/05/2025 - 07:30 AM
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <i class="fa-solid fa-circle-check text-success me-2"></i>
+
+                            24/05/2025 - 08:02 AM
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <i class="fa-solid fa-circle-check text-success me-2"></i>
+
+                            23/05/2025 - 07:55 AM
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <i class="fa-solid fa-circle-check text-success me-2"></i>
+
+                            22/05/2025 - 08:10 AM
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <i class="fa-solid fa-circle-check text-success me-2"></i>
+
+                            21/05/2025 - 07:48 AM
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <!-- BOTÓN -->
+
+                <div class="d-grid d-md-flex justify-content-center">
+
+                    <button type="button"
+                            class="btn btn-success btn-lg px-5">
+
+                        <i class="fa-solid fa-check me-2"></i>
+
+                        Marcar Asistencia
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- TOAST -->
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+        <div id="toastAsistencia"
+             class="toast"
+             role="alert">
+
+            <div class="toast-header">
+
+                <strong class="me-auto">
+
+                    Gym System
+
+                </strong>
+
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="toast">
+                </button>
+
+            </div>
+
+            <div class="toast-body">
+
+                Asistencia registrada correctamente.
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS Local -->
+
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
 </body>
+
 </html>
