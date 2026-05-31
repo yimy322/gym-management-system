@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Gestión de afiliados y calendario de asistencias del gimnasio">
+    <meta name="keywords" content="gym, gimnasio, afiliados, asistencia">
+    <meta name="author" content="Gym System">
+
+    <title>Gestión de Afiliados | Gym System</title>
+
+    <!-- Bootstrap Local -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+          integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+
+</head>
+
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+
+        <div class="container-fluid">
+
+            <a href="#" class="navbar-brand fw-bold">
+                <i class="fa-solid fa-dumbbell me-2"></i>
+                Gym System
+            </a>
+
+            <span class="text-white">
+                <i class="fa-solid fa-user me-1"></i>
+                Administrador
+            </span>
+
+        </div>
+
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+
+    <main class="container-fluid py-4">
+
+        <!-- ENCABEZADO -->
+
+        <div class="mb-4">
+
+            <h2 class="fw-bold">
+                <i class="fa-solid fa-users me-2"></i>
+                Gestión de Afiliados
+            </h2>
+
+            <p class="text-muted mb-0">
+                Consulta de afiliados y calendario de asistencias
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- TABLA -->
+
+            <section class="col-12 col-lg-8">
+
+                <div class="card shadow-sm">
+
+                    <div class="card-header">
+
+                        <h5 class="mb-1">
+                            Lista de Afiliados
+                        </h5>
+
+                        <small class="text-muted">
+                            Buscar por DNI, nombre o apellido
+                        </small>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <!-- BUSCADOR -->
+
+                        <div class="input-group mb-4">
+
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </span>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Buscar afiliado">
+
+                        </div>
+
+                        <!-- TABLA -->
+
+                        <div class="table-responsive">
+
+                            <table class="table table-hover align-middle">
+
+                                <thead class="table-light">
+
+                                    <tr>
+                                        <th>DNI</th>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Estado</th>
+                                        <th class="text-center">Acción</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    <!-- Ejemplo -->
+
+                                    <tr>
+
+                                        <td>72145896</td>
+                                        <td>Juan</td>
+                                        <td>Pérez</td>
+
+                                        <td>
+                                            <span class="badge bg-success">
+                                                ACTIVO
+                                            </span>
+                                        </td>
+
+                                        <td class="text-center">
+
+                                            <button
+                                                type="button"
+                                                class="btn btn-primary btn-sm">
+
+                                                <i class="fa-solid fa-calendar-check me-1"></i>
+                                                Ver
+
+                                            </button>
+
+                                        </td>
+
+                                    </tr>
+
+                                    <!-- Thymeleaf -->
+
+                                    <!--
+                                    <tr th:each="member : ${members}">
+
+                                        <td th:text="${member.dni}"></td>
+
+                                        <td th:text="${member.firstName}"></td>
+
+                                        <td th:text="${member.lastName}"></td>
+
+                                        <td>
+
+                                            <span class="badge bg-success"
+                                                  th:text="${member.status}">
+                                            </span>
+
+                                        </td>
+
+                                        <td class="text-center">
+
+                                            <a class="btn btn-primary btn-sm"
+                                               th:href="@{/members/{id}(id=${member.id})}">
+
+                                                <i class="fa-solid fa-calendar-check me-1"></i>
+                                                Ver
+
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+                                    -->
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- PANEL DERECHO -->
+
+            <aside class="col-12 col-lg-4">
+
+                <!-- AFILIADO -->
+
+                <div class="card shadow-sm mb-3">
+
+                    <div class="card-body">
+
+                        <div class="d-flex align-items-center">
+
+                            <div class="bg-primary text-white rounded-circle
+                                        d-flex justify-content-center align-items-center
+                                        fw-bold"
+                                 style="width:60px;height:60px;">
+
+                                JP
+
+                            </div>
+
+                            <div class="ms-3">
+
+                                <h5 class="mb-1">
+                                    Juan Pérez
+                                </h5>
+
+                                <small class="text-muted">
+                                    Afiliado seleccionado
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- RESUMEN -->
+
+                <div class="row g-3 mb-3">
+
+                    <div class="col-6">
+
+                        <div class="card shadow-sm h-100">
+
+                            <div class="card-body text-center">
+
+                                <h3 class="text-success fw-bold">
+                                    18
+                                </h3>
+
+                                <small>
+                                    Asistencias
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-6">
+
+                        <div class="card shadow-sm h-100">
+
+                            <div class="card-body text-center">
+
+                                <h6 class="text-primary fw-bold">
+                                    25/05
+                                </h6>
+
+                                <small>
+                                    Último ingreso
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- CALENDARIO -->
+
+                <div class="card shadow-sm">
+
+                    <div class="card-header">
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-primary btn-sm">
+
+                                <i class="fa-solid fa-chevron-left"></i>
+
+                            </button>
+
+                            <strong>
+                                Mayo 2026
+                            </strong>
+
+                            <button
+                                type="button"
+                                class="btn btn-outline-primary btn-sm">
+
+                                <i class="fa-solid fa-chevron-right"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <!-- CABECERA -->
+
+                        <div class="row row-cols-7 g-1 text-center fw-semibold text-secondary mb-2">
+
+                            <div class="col">D</div>
+                            <div class="col">L</div>
+                            <div class="col">M</div>
+                            <div class="col">M</div>
+                            <div class="col">J</div>
+                            <div class="col">V</div>
+                            <div class="col">S</div>
+
+                        </div>
+
+                        <!-- SEMANA EJEMPLO -->
+
+                        <div class="row row-cols-7 g-1 text-center">
+
+                            <div class="col">
+                                <div class="invisible border rounded p-2">0</div>
+                            </div>
+
+                            <div class="col">
+                                <div class="invisible border rounded p-2">0</div>
+                            </div>
+
+                            <div class="col">
+                                <div class="border rounded p-2">1</div>
+                            </div>
+
+                            <div class="col">
+                                <div class="bg-success text-white rounded p-2">2</div>
+                            </div>
+
+                            <div class="col">
+                                <div class="bg-success text-white rounded p-2">3</div>
+                            </div>
+
+                            <div class="col">
+                                <div class="border rounded p-2">4</div>
+                            </div>
+
+                            <div class="col">
+                                <div class="border rounded p-2">5</div>
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- LEYENDA -->
+
+                        <div class="d-flex align-items-center">
+
+                            <span class="badge bg-success me-2">
+                                &nbsp;
+                            </span>
+
+                            <small class="text-muted">
+                                Día con asistencia registrada
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+    <!-- Bootstrap JS Local -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>
