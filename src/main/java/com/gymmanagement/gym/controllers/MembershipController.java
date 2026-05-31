@@ -31,15 +31,15 @@ public class MembershipController {
      * return "memberships/settings";
      * }
      */
-    private final MembershipsService service;
+    //private final MembershipsService service;
 
     // LISTAR + FORMULARIO
     @GetMapping
     public String list(Model model) {
+        
+        // model.addAttribute("memberships", service.listar());
 
-        model.addAttribute("memberships", service.listar());
-
-        model.addAttribute("membership", new Memberships());
+        // model.addAttribute("membership", new Memberships());
 
         return "memberships/list";
     }
@@ -48,7 +48,7 @@ public class MembershipController {
     @PostMapping("/save")
     public String save(@ModelAttribute Memberships membership) {
 
-        service.guardar(membership);
+       // service.guardar(membership);
 
         return "redirect:/memberships";
     }
@@ -57,8 +57,8 @@ public class MembershipController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
 
-        model.addAttribute("membership", service.buscarPorId(id));
-        model.addAttribute("memberships", service.listar());
+        // model.addAttribute("membership", service.buscarPorId(id));
+        // model.addAttribute("memberships", service.listar());
 
         return "memberships/list";
     }
@@ -67,7 +67,7 @@ public class MembershipController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
 
-        service.eliminar(id);
+       // service.eliminar(id);
 
         return "redirect:/memberships";
     }

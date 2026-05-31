@@ -9,7 +9,7 @@ import com.gymmanagement.gym.repository.MembershipsRepository;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
+//@Service
 @RequiredArgsConstructor
 public class MembershipsServiceImpl implements MembershipsService {
 
