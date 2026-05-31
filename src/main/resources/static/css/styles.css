@@ -113,7 +113,9 @@
     color: #c1c7d0;
     font-size: 18px;
 }
-
+.form-control::placeholder {
+    color: #adb5bd ;
+}
 .btn-login {
     height: 58px;
     border-radius: 8px;
