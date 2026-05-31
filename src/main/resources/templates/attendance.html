@@ -3,9 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Control de Asistencia</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+
 </head>
 <body>
-    <h1>Asistencia</h1>
+    <div th:replace="fragments/navbar :: navbar"></div>
+      <!-- main content -->
+    <div class="container-fluid px-4 py-4" style="background-color: #F5F6F8; min-height: 100vh;">
+
+        <!-- title -->
+        <h5 class="fw-bold text-uppercase mb-4">
+            <i class="fa-solid fa-calendar-check me-2" style="color: #c9a227;"></i>
+            Control de Asistencia
+        </h5>
+
+        <!-- center card -->
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="bg-white rounded p-4">
+
+                    <!-- search dni -->
+                    <small class="text-uppercase fw-semibold text-muted" style="font-size: 10px;">DNI del Afiliado</small>
+                    <div class="input-group mt-2 mb-4">
+                        <span class="input-group-text bg-white">
+                            <i class="fa-solid fa-id-card text-muted"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="70000000" maxlength="8">
+                        <button class="btn text-white fw-bold px-4" style="background-color: #111;">
+                            <i class="fa-solid fa-magnifying-glass me-1"></i>
+                            Buscar
+                        </button>
+                    </div>
+
+                    <!-- member info -->
+                    <div class="d-flex align-items-center justify-content-between bg-light rounded p-3 mb-4">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex justify-content-center align-items-center rounded-circle"
+                                 style="width:40px; height:40px; background-color: #e0e0e0;">
+                                <i class="fa-solid fa-user text-muted"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold" style="font-size: 14px;">Sergio Huerta Rivas</div>
+                                <small class="text-muted">DNI: 70000000</small>
+                            </div>
+                        </div>
+                        <span class="badge rounded-pill" style="background-color: #d4f5e9; color: #28a745;">ACTIVO</span>
+                    </div>
+
+                    <!-- last attendances -->
+                    <div class="bg-white rounded border p-3 mb-4">
+                        <small class="text-uppercase fw-bold text-muted" style="font-size: 10px;">
+                            <i class="fa-regular fa-clock me-1" style="color: #c9a227;"></i>
+                            Últimas Asistencias
+                        </small>
+                        <hr class="my-2">
+                        <div class="d-flex align-items-center gap-2 py-2 border-bottom">
+                            <i class="fa-solid fa-circle" style="color: #28a745; font-size: 8px;"></i>
+                            <small>2025 - 12 - 12 - 6:40:00</small>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 py-2 border-bottom">
+                            <i class="fa-solid fa-circle" style="color: #28a745; font-size: 8px;"></i>
+                            <small>2025 - 12 - 10 - 7:15:00</small>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 py-2">
+                            <i class="fa-solid fa-circle" style="color: #28a745; font-size: 8px;"></i>
+                            <small>2025 - 12 - 08 - 6:50:00</small>
+                        </div>
+                    </div>
+
+                    <!-- mark attendance button -->
+                    <button class="btn w-100 text-white fw-bold text-uppercase py-3" style="background-color: #111; letter-spacing: 0.05em;">
+                        <i class="fa-solid fa-circle-check me-2"></i>
+                        Marcar Asistencia
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+
 </body>
 </html>
