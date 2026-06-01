@@ -4,17 +4,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.gymmanagement.gym.entities.Memberships;
+import com.gymmanagement.gym.entities.Membership;
 
 
 @Service
 public interface MembershipsService {
 
-    List<Memberships> listar();
+    List<Membership> listar();
 
-    Memberships guardar(Memberships membresia);
+    Membership guardar(Membership membresia);
 
-    Memberships buscarPorId(Long id);
+    Membership buscarPorId(Long id);
 
     void eliminar(Long id);
 }

@@ -1,8 +1,7 @@
 package com.gymmanagement.gym.entities;
 
 import java.math.BigDecimal;
-
-import com.gymmanagement.gym.utils.EstadoMembresia;
+import com.gymmanagement.gym.utils.SubscriptionStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,27 +15,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "membresia")
+@Table(name = "memberships")
 @Data
 @NoArgsConstructor
-public class Memberships {
+public class Membership {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_membresia")
-    private Long idMembresia;
+    private Long id;
 
-    @Column(name = "nombre", nullable = false, length = 50)
-    private String nombre;
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
 
-    @Column(name = "duracion_meses", nullable = false)
-    private Integer duracionMeses;
+    @Column(name = "duration_months", nullable = false)
+    private Integer durationMonths;
 
-    @Column(name = "precio", nullable = false, precision = 10, scale = 2)
-    private BigDecimal precio;
+    @Column(name = "price", nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "estado", nullable = false)
-    private EstadoMembresia estado;
-
+    @Column(name = "status", nullable = false)
+    private SubscriptionStatus status;
 }
