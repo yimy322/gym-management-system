@@ -1,11 +1,299 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Membresías</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
+
 <body>
-    <h1>Configuracion Membresias</h1>
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <!-- main content -->
+    <div class="container-fluid px-4 py-4" style="background-color: #F5F6F8; min-height: 100vh;">
+
+        <!-- title -->
+        <h5 class="fw-bold text-uppercase mb-4">
+            <i class="fa-solid fa-file-invoice me-2" style="color: #c9a227;"></i>
+            Configuracion de Membresías
+        </h5>
+
+        <!-- center card -->
+        <div class="row justify-content-center">
+            <!-- ESTADÍSTICAS -->
+            <div class="row g-3 mb-4">
+
+                <!-- Membresías -->
+
+                <div class="col-md-4">
+
+                    <div class="bg-white rounded p-3 h-100" style="border-top:3px solid #0d6efd;">
+
+                        <small class="text-uppercase text-muted fw-semibold" style="font-size:10px;">
+
+                            Membresías Registradas
+
+                        </small>
+
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+
+                            <h4 class="fw-bold mb-0">
+                                12
+                            </h4>
+
+                            <i class="fa-solid fa-clipboard-list fa-xl text-muted"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Plan más vendido -->
+
+                <div class="col-md-4">
+
+                    <div class="bg-white rounded p-3 h-100" style="border-top:3px solid #c9a227;">
+
+                        <small class="text-uppercase text-muted fw-semibold" style="font-size:10px;">
+
+                            Plan Más Vendido
+
+                        </small>
+
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+
+                            <h4 class="fw-bold mb-0">
+                                Mensual
+                            </h4>
+
+                            <i class="fa-solid fa-star fa-xl text-muted"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Precio Promedio -->
+
+                <div class="col-md-4">
+
+                    <div class="bg-white rounded p-3 h-100" style="border-top:3px solid #28a745;">
+
+                        <small class="text-uppercase text-muted fw-semibold" style="font-size:10px;">
+
+                            Precio Promedio
+
+                        </small>
+
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+
+                            <h4 class="fw-bold mb-0">
+                                S/. 95
+                            </h4>
+
+                            <i class="fa-solid fa-money-bill-wave fa-xl text-muted"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- FORMULARIO -->
+
+            <div class="bg-white rounded p-4 mb-4">
+
+                <small class="text-uppercase fw-bold text-muted" style="font-size:10px;">
+
+                    <i class="fa-solid fa-pen-to-square me-1" style="color:#c9a227;"></i>
+
+                    Datos de la Membresía
+
+                </small>
+
+                <hr>
+
+                <div class="row g-3">
+
+                    <div class="col-md-4">
+
+                        <label class="form-label fw-semibold">
+                            Nombre
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+
+                                <i class="fa-solid fa-file-signature"></i>
+
+                            </span>
+
+                            <input type="text" class="form-control" placeholder="Mensual">
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label class="form-label fw-semibold">
+                            Duración (Meses)
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+
+                                <i class="fa-solid fa-calendar-days"></i>
+
+                            </span>
+
+                            <input type="number" class="form-control" placeholder="1">
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <label class="form-label fw-semibold">
+                            Precio
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                S/.
+                            </span>
+
+                            <input type="number" class="form-control" placeholder="80">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-4 d-flex gap-2 flex-wrap">
+
+                    <button class="btn btn-success">
+
+                        <i class="fa-solid fa-plus me-1"></i>
+
+                        Crear
+
+                    </button>
+
+                    <button class="btn btn-warning">
+
+                        <i class="fa-solid fa-pen me-1"></i>
+
+                        Actualizar
+
+                    </button>
+
+                    <button class="btn btn-outline-secondary">
+
+                        <i class="fa-solid fa-eraser me-1"></i>
+
+                        Limpiar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- TABLA -->
+
+            <div class="bg-white rounded p-4">
+
+                <small class="text-uppercase fw-bold text-muted" style="font-size:10px;">
+
+                    <i class="fa-solid fa-table me-1" style="color:#c9a227;"></i>
+
+                    Listado de Membresías
+
+                </small>
+
+                <hr>
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Nombre</th>
+                                <th>Duración</th>
+                                <th>Precio</th>
+                                <th>Estado</th>
+                                <th class="text-center">Acciones</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>
+                                    <strong>Mensual</strong>
+                                </td>
+
+                                <td>1 mes</td>
+
+                                <td>S/. 80</td>
+
+                                <td>
+
+                                    <span class="badge bg-success">
+                                        Activo
+                                    </span>
+
+                                </td>
+
+                                <td class="text-center">
+
+                                    <button class="btn btn-sm btn-primary me-1">
+
+                                        <i class="fa-solid fa-pen"></i>
+
+                                    </button>
+
+                                    <button class="btn btn-sm btn-danger">
+
+                                        <i class="fa-solid fa-trash"></i>
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
+
 </html>
