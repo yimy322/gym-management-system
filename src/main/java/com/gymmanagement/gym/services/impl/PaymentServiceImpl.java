@@ -1,10 +1,11 @@
-package com.gymmanagement.gym.services;
+package com.gymmanagement.gym.services.impl;
 
 import java.math.BigDecimal;
 
 import org.springframework.stereotype.Service;
 
 import com.gymmanagement.gym.repository.PaymentRepository;
+import com.gymmanagement.gym.services.PaymentService;
 
 import lombok.RequiredArgsConstructor;
 
