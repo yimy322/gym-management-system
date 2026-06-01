@@ -1,11 +1,10 @@
-package com.gymmanagement.gym.services;
+package com.gymmanagement.gym.services.impl;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
-import com.gymmanagement.gym.entities.Memberships;
-import com.gymmanagement.gym.repository.MembershipsRepository;
+import com.gymmanagement.gym.entities.Membership;
+import com.gymmanagement.gym.repository.MembershipRepository;
+import com.gymmanagement.gym.services.MembershipsService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,20 +12,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MembershipsServiceImpl implements MembershipsService {
 
-    private final MembershipsRepository repository;
+    private final MembershipRepository repository;
 
     @Override
-    public List<Memberships> listar() {
+    public List<Membership> listar() {
         return repository.findAll();
     }
 
     @Override
-    public Memberships guardar(Memberships membresia) {
+    public Membership guardar(Membership membresia) {
         return repository.save(membresia);
     }
 
     @Override
-    public Memberships buscarPorId(Long id) {
+    public Membership buscarPorId(Long id) {
         return repository.findById(id).orElse(null);
     }
 

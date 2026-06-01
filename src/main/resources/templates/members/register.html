@@ -67,7 +67,49 @@
                 </button>
             </div>
         </div>
+
+        <!-- tabla afiliados -->
+        <div class="card p-4 mt-4">
+            <h6>
+                <i class="fa-solid fa-list" style="color: #c9a227;"></i>
+                   Lista de afiliados
+            </h6>
+            <table>
+                <thead class="text-uppercase text-muted" style="font-size: 11px;">
+                    <tr>
+                        <th>DNI</th>
+                        <th>NONBRE</th>
+                        <th>APELLIDOS</th>
+                        <th>ESTADO</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="afiliado : ${afiliados}">
+                        <td th:text="${afiliado.dni}"></td>
+                        <td th:text="${afiliado.nombres}"></td>
+                        <td th:text="${afiliado.apellidos}"></td>
+                        <td>
+                            <span class="badge rounded-pill px-3 py-2"
+                                style="background-color: #d1f5e0; color: #1a7a4a; font-size: 11px;">
+                                ACTIVO
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm border-0 p-1" style="color: #5b8dee;">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button class="btn btn-sm border-0 p-1" style="color: #e74c3c;">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                </tbody>
+            </table>
+        </div>
         <script th:src="@{/js/bootstrap.min.js}"></script>
+
 </body>
 
 </html>
