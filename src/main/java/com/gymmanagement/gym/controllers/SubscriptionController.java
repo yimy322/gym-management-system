@@ -46,11 +46,4 @@ public class SubscriptionController {
         return "redirect:/subscriptions";
     }
 
-    @GetMapping("/test-assign")
-    public String testAssign() {
-
-        subscriptionService.assignMembership(1L, 1L);
-
-        return "redirect:/subscriptions";
-    }
 }
