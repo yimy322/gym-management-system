@@ -12,7 +12,7 @@ import com.gymmanagement.gym.repository.MemberRepository;
 import com.gymmanagement.gym.services.AttendanceService;
 
 @Controller
-@RequestMapping("/attendances")
+@RequestMapping("/attendance")
 public class AttendanceController {
 
     private final AttendanceService attendanceService;
@@ -23,8 +23,9 @@ public class AttendanceController {
         this.memberRepository = memberRepository;
     }
 
-    @GetMapping("/attendance")
-    public String list() {
+    @GetMapping()
+    public String list(Model model) {
+        model.addAttribute("activePage", "attendance");
         return "attendance";
     }
 

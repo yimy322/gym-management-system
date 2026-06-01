@@ -19,6 +19,7 @@ public class DashboardController {
     @GetMapping("/dashboard")
     public String index(Model model) {
         BigDecimal totalIncome = paymentService.getTotalAmount();
+        model.addAttribute("activePage", "dashboard");
         model.addAttribute("totalIncome", totalIncome);
         return "dashboard";
     }

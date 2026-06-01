@@ -8,4 +8,6 @@ import com.gymmanagement.gym.entities.Member;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long>{
 
+    boolean existsByDni(String dni);
+
 }

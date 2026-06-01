@@ -19,7 +19,8 @@ import lombok.RequiredArgsConstructor;
 public class MembershipController {
 
     @GetMapping("/settings")
-    public String settings() {
+    public String settings(Model model) {
+        model.addAttribute("activePage", "settings");
         return "memberships/settings";
     }
 
@@ -32,7 +33,7 @@ public class MembershipController {
         // model.addAttribute("memberships", service.listar());
 
         // model.addAttribute("membership", new Memberships());
-
+        model.addAttribute("activePage", "memberships");
         return "memberships/list";
     }
 
