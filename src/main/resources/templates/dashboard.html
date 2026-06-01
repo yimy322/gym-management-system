@@ -26,7 +26,7 @@
                 <div class="bg-white rounded p-3 h-100" style="border-top: 3px solid #28a745;">
                     <small class="text-uppercase text-muted fw-semibold" style="font-size: 10px;">Ingresos Totales</small>
                     <div class="d-flex justify-content-between align-items-center mt-2">
-                        <h4 class="fw-bold mb-0">S/10,580</h4>
+                        <h4 class="fw-bold mb-0" th:text="'S/' + ${#numbers.formatDecimal(totalIncome, 1, 'COMMA', 2, 'POINT')}">S/10,580</h4>
                         <i class="fa-regular fa-money-bill-1 fa-xl text-muted"></i>
                     </div>
                 </div>
