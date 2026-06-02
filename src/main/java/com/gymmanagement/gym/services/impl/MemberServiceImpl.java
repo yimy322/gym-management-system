@@ -59,4 +59,14 @@ public class MemberServiceImpl implements MemberService{
         memberRepository.save(member);
     }
 
+    @Override
+    public Long countByStatusTrue() {
+        return memberRepository.countByStatusTrue();
+    }
+
+    @Override
+    public List<Member> searchMembers(String keyword) {
+        return memberRepository.findByDniContainingIgnoreCaseOrFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(keyword, keyword, keyword);
+    }
+
 }

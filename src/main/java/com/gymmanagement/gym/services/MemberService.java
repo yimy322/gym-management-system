@@ -19,4 +19,8 @@ public interface MemberService {
 
     void toggleStatus(Long id);
 
+    Long countByStatusTrue();
+
+    List<Member> searchMembers(String keyword);
+
 }

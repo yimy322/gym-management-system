@@ -1,5 +1,7 @@
 package com.gymmanagement.gym.controllers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gymmanagement.gym.entities.Member;
 import com.gymmanagement.gym.services.MemberService;
@@ -24,7 +28,7 @@ public class MemberController {
 
     @GetMapping
     public String list(Model model) {
-        model.addAttribute("afiliados", memberService.findAll());
+        model.addAttribute("members", memberService.findAll());
         model.addAttribute("activePage", "members");
         return "members/list";
     }
@@ -71,6 +75,12 @@ public class MemberController {
     public String toggleStatus(@PathVariable Long id) {
         memberService.toggleStatus(id);
         return "redirect:/members/register";
+    }
+
+    @GetMapping("/search")
+    @ResponseBody
+    public List<Member> search(@RequestParam String keyword){
+        return memberService.searchMembers(keyword);
     }
 
 }
