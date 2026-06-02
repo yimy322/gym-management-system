@@ -1,11 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Afiliados</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+
 </head>
+
 <body>
-    <h1>Lista Miembros</h1>
+    <!-- navbar -->
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <!-- main content -->
+    <div class="container-fluid px-4 py-4" style="background-color: #F5F6F8; min-height: 100vh;">
+
+        <!-- title -->
+        <h5 class="fw-bold text-uppercase mb-4">
+            <i class="fa-solid fa-users me-2" style="color: #c9a227;"></i>
+            Afiliados
+        </h5>
+
+        <div class="row g-4">
+
+            <!-- members table -->
+            <div class="col-lg-8">
+
+                <!-- search bar -->
+                <div class="bg-white rounded p-3 mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="fa-solid fa-magnifying-glass text-muted"></i>
+                        </span>
+                        <input id="searchInput" type="text" class="form-control border-start-0"
+                            placeholder="Buscar por DNI, Nombre o Apellido">
+                    </div>
+                </div>
+
+                <!-- table -->
+                <div class="bg-white rounded">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase text-muted fw-semibold" style="font-size: 11px;">DNI</th>
+                                <th class="text-uppercase text-muted fw-semibold" style="font-size: 11px;">Nombres</th>
+                                <th class="text-uppercase text-muted fw-semibold" style="font-size: 11px;">Apellidos
+                                </th>
+                                <th class="text-uppercase text-muted fw-semibold" style="font-size: 11px;">Estado</th>
+                                <th class="text-center text-uppercase text-muted fw-semibold" style="font-size: 11px;">
+                                    Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="memberTableBody">
+                            <tr th:each="member : ${members}" class="member-row">
+                                <td th:text="${member.dni}" class="dni"></td>
+                                <td th:text="${member.firstName}" class="first-name"></td>
+                                <td th:text="${member.lastName}" class="last-name"></td>
+                                <td>
+                                    <span th:text="${member.status} ? 'ACTIVO' : 'INACTIVO'"
+                                        th:class="${member.status} ? 'badge bg-success text-light' : 'badge bg-danger text-light'"></span>
+                                </td>
+                                <td class="text-center"><i class="fa-regular fa-eye text-muted"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <!-- attendance panel -->
+            <aside class="col-lg-4">
+
+                <!-- selected member -->
+                <div class="bg-white rounded p-3 mb-3">
+                    <div class="d-flex align-items-center">
+                        <div class="d-flex justify-content-center align-items-center fw-bold rounded-circle text-white"
+                            style="width:50px; height:50px; background-color: #111; font-size:14px;">
+                            JP
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="mb-0 fw-bold">Juan Pérez</h6>
+                            <small class="text-muted">Afiliado seleccionado</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- summary cards -->
+                <div class="row g-3 mb-3">
+                    <div class="col-6">
+                        <div class="bg-white rounded p-3 text-center">
+                            <h3 class="fw-bold mb-0" style="color: #28a745;">18</h3>
+                            <small class="text-muted">Asistencias</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="bg-white rounded p-3 text-center">
+                            <h6 class="fw-bold mb-0" style="color: #0d6efd;">25/05</h6>
+                            <small class="text-muted">Último ingreso</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- calendar -->
+                <div class="bg-white rounded p-3">
+
+                    <!-- calendar header -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <button class="btn btn-outline-secondary btn-sm">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <strong style="font-size: 13px;">Mayo 2026</strong>
+                        <button class="btn btn-outline-secondary btn-sm">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- day headers -->
+                    <div class="row row-cols-7 g-1 text-center fw-semibold text-muted mb-2" style="font-size: 11px;">
+                        <div class="col">DOM</div>
+                        <div class="col">LUN</div>
+                        <div class="col">MAR</div>
+                        <div class="col">MIE</div>
+                        <div class="col">JUE</div>
+                        <div class="col">VIE</div>
+                        <div class="col">SAB</div>
+                    </div>
+
+                    <!-- week 1 -->
+                    <div class="row row-cols-7 g-1 text-center mb-1" style="font-size: 12px;">
+                        <div class="col">
+                            <div class="invisible rounded p-1">0</div>
+                        </div>
+                        <div class="col">
+                            <div class="invisible rounded p-1">0</div>
+                        </div>
+                        <div class="col">
+                            <div class="invisible rounded p-1">0</div>
+                        </div>
+                        <div class="col">
+                            <div class="invisible rounded p-1">0</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">1</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">2</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">3</div>
+                        </div>
+                    </div>
+
+                    <!-- week 2 -->
+                    <div class="row row-cols-7 g-1 text-center mb-1" style="font-size: 12px;">
+                        <div class="col">
+                            <div class="border rounded p-1">4</div>
+                        </div>
+                        <div class="col">
+                            <div class="rounded p-1" style="background-color: #d4f5e9; color: #28a745;">5</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">6</div>
+                        </div>
+                        <div class="col">
+                            <div class="rounded p-1" style="background-color: #d4f5e9; color: #28a745;">7</div>
+                        </div>
+                        <div class="col">
+                            <div class="rounded p-1" style="background-color: #d4f5e9; color: #28a745;">8</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">9</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">10</div>
+                        </div>
+                    </div>
+
+                    <!-- week 3 -->
+                    <div class="row row-cols-7 g-1 text-center mb-1" style="font-size: 12px;">
+                        <div class="col">
+                            <div class="border rounded p-1">11</div>
+                        </div>
+                        <div class="col">
+                            <div class="rounded p-1" style="background-color: #d4f5e9; color: #28a745;">12</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">13</div>
+                        </div>
+                        <div class="col">
+                            <div class="rounded p-1" style="background-color: #d4f5e9; color: #28a745;">14</div>
+                        </div>
+                        <div class="col">
+                            <div class="rounded p-1 fw-bold" style="background-color: #111; color: #fff;">15</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">16</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">17</div>
+                        </div>
+                    </div>
+
+                    <!-- week 4 -->
+                    <div class="row row-cols-7 g-1 text-center mb-1" style="font-size: 12px;">
+                        <div class="col">
+                            <div class="border rounded p-1">18</div>
+                        </div>
+                        <div class="col">
+                            <div class="rounded p-1" style="background-color: #d4f5e9; color: #28a745;">19</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">20</div>
+                        </div>
+                        <div class="col">
+                            <div class="rounded p-1" style="background-color: #d4f5e9; color: #28a745;">21</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">22</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">23</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">24</div>
+                        </div>
+                    </div>
+
+                    <!-- week 5 -->
+                    <div class="row row-cols-7 g-1 text-center mb-3" style="font-size: 12px;">
+                        <div class="col">
+                            <div class="border rounded p-1">25</div>
+                        </div>
+                        <div class="col">
+                            <div class="rounded p-1" style="background-color: #d4f5e9; color: #28a745;">26</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">27</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">28</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">29</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">30</div>
+                        </div>
+                        <div class="col">
+                            <div class="border rounded p-1">31</div>
+                        </div>
+                    </div>
+
+                    <hr class="my-2">
+
+                    <!-- legend -->
+                    <div class="d-flex align-items-center">
+                        <span class="rounded me-2"
+                            style="width:14px; height:14px; background-color: #d4f5e9; display:inline-block;"></span>
+                        <small class="text-muted">Día con asistencia registrada</small>
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const memberRows = document.querySelectorAll(".member-row");
+        searchInput.addEventListener("input", function () {
+            const query = this.value.trim().toLowerCase();
+            memberRows.forEach(row => {
+                const dni = row.querySelector(".dni")
+                    .textContent
+                    .toLowerCase();
+                const firstName = row.querySelector(".first-name")
+                    .textContent
+                    .toLowerCase();
+                const lastName = row.querySelector(".last-name")
+                    .textContent
+                    .toLowerCase();
+                const match =
+                    dni.includes(query) ||
+                    firstName.includes(query) ||
+                    lastName.includes(query);
+                if (match) {
+                    row.style.removeProperty("display");
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
+    </script>
+
 </body>
+
 </html>
