@@ -23,21 +23,22 @@
                     PANEL ADMINISTRATIVO
                 </div>
             </div>
-            <form>
+            <form th:action="@{/login}" method="post">
                 <div class="mb-4">
                     <label class="form-label">USUARIO</label>
                     <div class="position-relative">
                         <i class="fa-solid fa-user input-icon"></i>
-                        <input type="text" class="form-control" />
+                        <input type="text" name="username" class="form-control" />
                     </div>
                 </div>
                 <div class="mb-5">
                     <label class="form-label">CONTRASEÑA</label>
                     <div class="position-relative">
                         <i class="fa-solid fa-lock input-icon"></i>
-                        <input type="password" class="form-control" />
+                        <input type="password" name="password" class="form-control" />
                     </div>
                 </div>
+                <p th:if="${param.error}" class="form-text text-danger">Usuario o contraseña incorrectos</p>
                 <button type="submit" class="btn btn-login text-white w-100">
                     <i class="fa-solid fa-arrow-right-to-bracket"></i>
                     INICIAR SESIÓN
