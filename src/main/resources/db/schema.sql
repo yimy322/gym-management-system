@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(18) NOT NULL UNIQUE,
     password VARCHAR(60) NOT NULL,
@@ -8,12 +8,12 @@ CREATE TABLE users (
         ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE roles (
+CREATE TABLE IF NOT EXISTS roles (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL UNIQUE
 );
 
-CREATE TABLE user_roles (
+CREATE TABLE IF NOT EXISTS user_roles (
     user_id BIGINT NOT NULL,
     role_id BIGINT NOT NULL,
     PRIMARY KEY (user_id, role_id),
@@ -27,7 +27,7 @@ CREATE TABLE user_roles (
         ON DELETE CASCADE
 );
 
-CREATE TABLE members (
+CREATE TABLE IF NOT EXISTS members (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     dni VARCHAR(8) NOT NULL UNIQUE,
     first_name VARCHAR(100) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE members (
         ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE memberships (
+CREATE TABLE IF NOT EXISTS memberships (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
     duration_months INT NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE memberships (
         ON UPDATE CURRENT_TIMESTAMP
 );
 
-CREATE TABLE subscriptions (
+CREATE TABLE IF NOT EXISTS subscriptions (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     member_id BIGINT NOT NULL,
     membership_id BIGINT NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE subscriptions (
         REFERENCES memberships(id)
 );
 
-CREATE TABLE payments (
+CREATE TABLE IF NOT EXISTS payments (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     subscription_id BIGINT NOT NULL,
     amount DECIMAL(10,2) NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE payments (
         REFERENCES subscriptions(id)
 );
 
-CREATE TABLE attendances (
+CREATE TABLE IF NOT EXISTS attendances (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     member_id BIGINT NOT NULL,
     attendance_date DATE NOT NULL,
