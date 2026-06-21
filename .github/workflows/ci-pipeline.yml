@@ -1,0 +1,28 @@
+name: CI Pipeline - Gym Management System
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build-and-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: 1. Descargar Codigo Fuente
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar Entorno Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
