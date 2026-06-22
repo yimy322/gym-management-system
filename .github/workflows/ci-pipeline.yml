@@ -26,3 +26,16 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+
+      - name: 3. Compilacion y Pruebas Unitarias (JaCoCo Coverage)
+        run: mvn clean verify
+
+      - name: 4. Analisis de Calidad de Codigo (SonarCloud)
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn sonar:sonar \
+            -Dsonar.projectKey=yimy322_gym-management-system \
+            -Dsonar.organization=yimy322 \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
