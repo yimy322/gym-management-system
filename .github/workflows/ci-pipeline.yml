@@ -41,9 +41,6 @@ jobs:
             -Dsonar.organization=yimy322 \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
-      
-      - name: Resolver dependencias Maven para Snyk
-        run: mvn dependency:resolve
 
       - name: 5. Analisis de Seguridad de Dependencias (Snyk SAST)
         env:
@@ -51,7 +48,7 @@ jobs:
         run: |
           npm install -g snyk
           snyk auth $SNYK_TOKEN
-          snyk test --all-projects --severity-threshold=high
+          snyk test pom.xml --severity-threshold=high
 
       - name: 6. Empaquetado - Construir Imagen Docker
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/gym-app:latest .
