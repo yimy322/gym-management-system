@@ -10,11 +10,11 @@ import com.gymmanagement.gym.entities.Membership;
 @Service
 public interface MembershipsService {
 
-    List<Membership> listar();
+    List<Membership> findAll();
 
-    Membership guardar(Membership membresia);
+    Membership save(Membership membresia);
 
-    Membership buscarPorId(Long id);
+    Membership findById(Long id);
 
-    void eliminar(Long id);
+    void delete(Long id);
 }
