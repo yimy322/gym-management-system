@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gymmanagement.gym.entities.Membership;
-import com.gymmanagement.gym.services.MembershipsService;
 
 import lombok.RequiredArgsConstructor;
 

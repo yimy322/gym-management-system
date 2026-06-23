@@ -41,7 +41,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
                 .orElseThrow(() -> new RuntimeException("Membresía no encontrada"));
         // Verificar que el afiliado no tenga una membresía activa
         if (subscriptionRepository
-                .findByMemberAndStatus(member, SubscriptionStatus.ACTIVO)
+                .findByMemberAndStatus(member, SubscriptionStatus.ACTIVE)
                 .isPresent()) {
 
             throw new RuntimeException(
@@ -57,7 +57,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         subscription.setMembership(membership);
         subscription.setStartDate(startDate);
         subscription.setEndDate(endDate);
-        subscription.setStatus(SubscriptionStatus.ACTIVO);
+        subscription.setStatus(SubscriptionStatus.ACTIVE);
 
         // Persistir la suscripción en la base de datos
         return subscriptionRepository.save(subscription);
@@ -76,13 +76,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Scheduled(cron = "0 0 0 * * *")
     public void updateExpiredSubscriptions() {
     
-        List<Subscription> activeSubscriptions = subscriptionRepository.findByStatus(SubscriptionStatus.ACTIVO);
+        List<Subscription> activeSubscriptions = subscriptionRepository.findByStatus(SubscriptionStatus.ACTIVE);
 
         LocalDate today = LocalDate.now();
 
         for (Subscription subscription : activeSubscriptions) {
             if (subscription.getEndDate().isBefore(today)) {
-                subscription.setStatus(SubscriptionStatus.VENCIDO);
+                subscription.setStatus(SubscriptionStatus.INACTIVE);
                 subscriptionRepository.save(subscription);
             }
         }
