@@ -47,7 +47,7 @@ jobs:
           npm install -g snyk
           snyk test || true 
         #el test escanea el pom
-        #el true significa que si hay vulnerab.. rompera el ci
+        #el true significa que si hay vulnerabilidades rompera el ci
 
       - name: 6. Empaquetado - Construir Imagen Docker
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/gym-app:latest .
