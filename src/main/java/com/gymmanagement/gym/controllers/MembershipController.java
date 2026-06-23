@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gymmanagement.gym.dto.MembershipDTO;
 import com.gymmanagement.gym.entities.Membership;
 
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ public class MembershipController {
 
     // GUARDAR O ACTUALIZAR
     @PostMapping("/save")
-    public String save(@ModelAttribute Membership membership) {
+    public String save(@ModelAttribute MembershipDTO membershipDTO) {
 
         // service.guardar(membership);
 

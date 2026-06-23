@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gymmanagement.gym.dto.MemberDTO;
 import com.gymmanagement.gym.entities.Member;
+import com.gymmanagement.gym.mapper.MemberMapper;
 import com.gymmanagement.gym.services.MemberService;
 
 import jakarta.validation.Valid;
@@ -25,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 
     private final MemberService memberService;
+    private final MemberMapper memberMapper;
 
     @GetMapping
     public String list(Model model) {
@@ -42,13 +45,14 @@ public class MemberController {
     }
 
     @PostMapping("/register")
-    public String save(@Valid @ModelAttribute Member member,
+    public String save(@Valid @ModelAttribute MemberDTO memberDTO,
                    BindingResult result,
                    Model model) {
         if(result.hasErrors()) {
             model.addAttribute("activePage", "membersRegistration");
             return "members/register";
         }
+        Member member = memberMapper.toEntity(memberDTO);
         if(member.getId() != null) {
             Member current = memberService.findById(member.getId()).orElseThrow();
             //seteamos el original por si acaso
