@@ -43,14 +43,12 @@ jobs:
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
       - name: 5. Analisis de Seguridad de Dependencias (Snyk SAST)
+        uses: snyk/actions/maven@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: |
-          npm install -g snyk
-          snyk auth $SNYK_TOKEN
-          snyk test
-        #el test escanea el pom
-
+        with:
+          args: --severity-threshold=high
+          
       - name: 6. Empaquetado - Construir Imagen Docker
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/gym-app:latest .
 
