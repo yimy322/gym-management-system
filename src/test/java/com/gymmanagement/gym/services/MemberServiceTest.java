@@ -39,7 +39,7 @@ public class MemberServiceTest {
         member = new Member();
         member.setId(1L);
         member.setFirstName("Juan");
-        member.setLastName("Pérez");
+        member.setLastName("Perez");
         member.setDni("12345678");
     }
 
