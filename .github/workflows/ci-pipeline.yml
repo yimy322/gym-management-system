@@ -41,6 +41,9 @@ jobs:
             -Dsonar.organization=yimy322 \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+      
+      - name: Resolver dependencias Maven para Snyk
+        run: mvn dependency:resolve
 
       - name: 5. Analisis de Seguridad de Dependencias (Snyk SAST)
         env:
