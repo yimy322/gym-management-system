@@ -3,9 +3,11 @@ package com.gymmanagement.gym.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -24,7 +26,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.gymmanagement.gym.entities.Membership;
 import com.gymmanagement.gym.repository.MembershipRepository;
 import com.gymmanagement.gym.services.impl.MembershipsServiceImpl;
-import com.gymmanagement.gym.utils.SubscriptionStatus;
 
 @ExtendWith(MockitoExtension.class)
 public class MembershipsServiceTest {
@@ -44,7 +45,6 @@ public class MembershipsServiceTest {
         membership.setName("Plan Basico");
         membership.setDurationMonths(1);
         membership.setPrice(new BigDecimal("300.00"));
-        membership.setStatus(SubscriptionStatus.ACTIVE);
     }
 
     //FIND ALL
@@ -80,7 +80,7 @@ public class MembershipsServiceTest {
     @Test
     void findById_whenExists_shouldReturnMembership() {
         when(repository.findById(1L)).thenReturn(Optional.of(membership));
-        Membership result = membershipsServiceImpl.findById(1L);
+        Membership result = membershipsServiceImpl.findById(1L).get();
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals("Plan Basico", result.getName());
@@ -90,9 +90,9 @@ public class MembershipsServiceTest {
     @Test
     void findById_whenNotFound_shouldReturnNull() {
         when(repository.findById(99L)).thenReturn(Optional.empty());
-        Membership result = membershipsServiceImpl.findById(99L);
-        assertNull(result);//el servicio hace orElse(null)
-        verify(repository, times(1)).findById(99L);
+        Optional<Membership> result = membershipsServiceImpl.findById(99L);
+        assertTrue(result.isEmpty());
+        verify(repository).findById(99L);
     }
 
     //DELETE
@@ -101,6 +101,46 @@ public class MembershipsServiceTest {
         doNothing().when(repository).deleteById(1L);
         membershipsServiceImpl.delete(1L);
         verify(repository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    void update_whenMembershipExists_shouldUpdateAndReturnIt() {
+        Membership data = new Membership();
+        data.setName("Plan Premium");
+        data.setDurationMonths(3);
+        data.setPrice(new BigDecimal("700.00"));
+        data.setStatus(true);
+
+        when(repository.findById(1L)).thenReturn(Optional.of(membership));
+        when(repository.save(any(Membership.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        Membership result = membershipsServiceImpl.update(1L, data);
+
+        assertEquals("Plan Premium", result.getName());
+        assertEquals(3, result.getDurationMonths());
+        assertEquals(new BigDecimal("700.00"), result.getPrice());
+        assertTrue(result.getStatus());
+        verify(repository, times(1)).save(any(Membership.class));
+    }
+
+    @Test
+    void update_whenMembershipNotFound_shouldThrowException() {
+        when(repository.findById(99L)).thenReturn(Optional.empty());
+
+        RuntimeException ex = assertThrows(RuntimeException.class, () ->
+                membershipsServiceImpl.update(99L, membership));
+
+        assertEquals("Membresia no encontrada", ex.getMessage());
+        verify(repository, never()).save(any());
+    }
+
+    @Test
+    void getAveragePrice_shouldReturnAverageFromRepository() {
+        when(repository.findAveragePrice()).thenReturn(new BigDecimal("450.50"));
+
+        BigDecimal result = membershipsServiceImpl.getAveragePrice();
+
+        assertEquals(new BigDecimal("450.50"), result);
     }
 
 }

@@ -3,12 +3,8 @@ package com.gymmanagement.gym.entities;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.gymmanagement.gym.utils.SubscriptionStatus;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -44,9 +40,8 @@ public class Subscription {
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private SubscriptionStatus status; // "ACTIVE", "EXPIRED"
+    private Boolean status = true;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

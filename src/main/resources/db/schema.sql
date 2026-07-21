@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS memberships (
     name VARCHAR(50) NOT NULL,
     duration_months INT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
-    status VARCHAR(20) NOT NULL,
+    status BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS subscriptions (
     membership_id BIGINT NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
-    status VARCHAR(20) NOT NULL,
+    status BOOLEAN NOT NULL DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP,
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS attendances (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     member_id BIGINT NOT NULL,
     attendance_date DATE NOT NULL,
-    attendance_time TIME NOT NULL,
+    check_in_time TIMESTAMP NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_attendances_member
         FOREIGN KEY (member_id)
