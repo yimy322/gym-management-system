@@ -1,6 +1,8 @@
 package com.gymmanagement.gym.services;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,12 @@ public interface MembershipsService {
 
     Membership save(Membership membresia);
 
-    Membership findById(Long id);
+    Membership update(Long id, Membership membership);
+
+    Optional<Membership> findById(Long id);
 
     void delete(Long id);
+
+    BigDecimal getAveragePrice();
+
 }

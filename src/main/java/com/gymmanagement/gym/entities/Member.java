@@ -15,9 +15,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,25 +30,18 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "El DNI es obligatorio")
-    @Size(min = 8, max = 8, message = "El DNI debe tener 8 dígitos")
     @Column(name = "dni", nullable = false, unique = true, length = 8)
     private String dni;
 
-    @NotBlank(message = "Los nombres son obligatorios")
     @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
 
-    @NotBlank(message = "Los apellidos son obligatorios")
     @Column(name = "last_name", nullable = false, length = 100)
     private String lastName;
 
-    @NotBlank(message = "El teléfono es obligatorio")
     @Column(name = "phone", length = 15)
     private String phone;
 
-    @NotBlank(message = "El email es obligatorio")
-    @Email(message = "Email inválido")
     @Column(name = "email", length = 100)
     private String email;
 

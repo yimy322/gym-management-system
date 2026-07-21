@@ -69,4 +69,9 @@ public class MemberServiceImpl implements MemberService{
         return memberRepository.findByDniContainingIgnoreCaseOrFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(keyword, keyword, keyword);
     }
 
+    @Override
+    public Optional<Member> findByDni(String dni) {
+        return memberRepository.findByDni(dni);
+    }
+
 }

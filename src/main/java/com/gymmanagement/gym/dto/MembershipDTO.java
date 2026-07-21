@@ -1,7 +1,9 @@
 package com.gymmanagement.gym.dto;
 
 import java.math.BigDecimal;
-import com.gymmanagement.gym.utils.SubscriptionStatus;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,9 +14,14 @@ import lombok.Setter;
 public class MembershipDTO {
 
     private Long id;
+
+    @NotBlank(message = "El nombre es obligatorio")
     private String name;
+
+    @NotNull(message = "La duracion no puede ser nulo")
     private Integer durationMonths;
+
+    @NotNull(message = "El precio es obligatorio")
     private BigDecimal price;
-    private SubscriptionStatus status;
 
 }

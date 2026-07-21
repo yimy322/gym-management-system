@@ -1,6 +1,8 @@
 package com.gymmanagement.gym.services.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -27,12 +29,27 @@ public class MembershipsServiceImpl implements MembershipsService {
     }
 
     @Override
-    public Membership findById(Long id) {
-        return repository.findById(id).orElse(null);
+    public Optional<Membership> findById(Long id) {
+        return repository.findById(id);
     }
 
     @Override
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public Membership update(Long id, Membership membership) {
+        Membership membershipDb = repository.findById(id).orElseThrow(() -> new RuntimeException("Membresia no encontrada"));
+        membershipDb.setName(membership.getName());
+        membershipDb.setDurationMonths(membership.getDurationMonths());
+        membershipDb.setPrice(membership.getPrice());
+        membershipDb.setStatus(membership.getStatus());
+        return repository.save(membershipDb);
+    }
+
+    @Override
+    public BigDecimal getAveragePrice() {
+        return repository.findAveragePrice();
     }
 }

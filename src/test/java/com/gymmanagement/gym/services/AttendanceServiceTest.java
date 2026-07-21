@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -12,6 +13,7 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -124,6 +126,111 @@ public class AttendanceServiceTest {
         assertFalse(result.isEmpty());
         assertEquals(1, result.size());
         verify(attendanceRepository, times(1)).findAll();
+    }
+
+    @Test
+    void findByMemberAndMonth_whenMemberExists_shouldReturnAttendancesInRange() {
+        YearMonth yearMonth = YearMonth.of(2026, 7);
+        List<Attendance> monthAttendances = List.of(attendance);
+
+        when(memberRepository.findById(1L)).thenReturn(Optional.of(member));
+        when(attendanceRepository.findByMemberAndAttendanceDateBetween(
+                member, yearMonth.atDay(1), yearMonth.atEndOfMonth()))
+                .thenReturn(monthAttendances);
+
+        List<Attendance> result = attendanceServiceImpl.findByMemberAndMonth(1L, yearMonth);
+
+        assertEquals(1, result.size());
+        verify(attendanceRepository, times(1))
+                .findByMemberAndAttendanceDateBetween(member, yearMonth.atDay(1), yearMonth.atEndOfMonth());
+    }
+
+    @Test
+    void findByMemberAndMonth_whenMemberNotFound_shouldThrowException() {
+        when(memberRepository.findById(99L)).thenReturn(Optional.empty());
+
+        RuntimeException ex = assertThrows(RuntimeException.class, () ->
+                attendanceServiceImpl.findByMemberAndMonth(99L, YearMonth.of(2026, 7)));
+
+        assertEquals("Afiliado no encontrado", ex.getMessage());
+        verify(attendanceRepository, never()).findByMemberAndAttendanceDateBetween(any(), any(), any());
+    }
+
+    @Test
+    void countByMember_whenMemberExists_shouldReturnCount() {
+        when(memberRepository.findById(1L)).thenReturn(Optional.of(member));
+        when(attendanceRepository.countByMember(member)).thenReturn(7L);
+
+        long result = attendanceServiceImpl.countByMember(1L);
+
+        assertEquals(7L, result);
+    }
+
+    @Test
+    void countByMember_whenMemberNotFound_shouldThrowException() {
+        when(memberRepository.findById(99L)).thenReturn(Optional.empty());
+
+        RuntimeException ex = assertThrows(RuntimeException.class, () ->
+                attendanceServiceImpl.countByMember(99L));
+
+        assertEquals("Afiliado no encontrado", ex.getMessage());
+        verify(attendanceRepository, never()).countByMember(any());
+    }
+
+    @Test
+    void findLastAttendance_whenMemberExistsAndHasAttendance_shouldReturnLastOne() {
+        when(memberRepository.findById(1L)).thenReturn(Optional.of(member));
+        when(attendanceRepository.findTopByMemberOrderByAttendanceDateDesc(member))
+                .thenReturn(Optional.of(attendance));
+
+        Optional<Attendance> result = attendanceServiceImpl.findLastAttendance(1L);
+
+        assertTrue(result.isPresent());
+        assertEquals(attendance, result.get());
+    }
+
+    @Test
+    void findLastAttendance_whenMemberExistsButHasNoAttendance_shouldReturnEmpty() {
+        when(memberRepository.findById(1L)).thenReturn(Optional.of(member));
+        when(attendanceRepository.findTopByMemberOrderByAttendanceDateDesc(member))
+                .thenReturn(Optional.empty());
+
+        Optional<Attendance> result = attendanceServiceImpl.findLastAttendance(1L);
+
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void findLastAttendance_whenMemberNotFound_shouldThrowException() {
+        when(memberRepository.findById(99L)).thenReturn(Optional.empty());
+
+        RuntimeException ex = assertThrows(RuntimeException.class, () ->
+                attendanceServiceImpl.findLastAttendance(99L));
+
+        assertEquals("Afiliado no encontrado", ex.getMessage());
+        verify(attendanceRepository, never()).findTopByMemberOrderByAttendanceDateDesc(any());
+    }
+
+    @Test
+    void getAverageDailyAttendance_shouldCalculateAverageCorrectly() {
+        when(attendanceRepository.countByAttendanceDateBetween(any(LocalDate.class), any(LocalDate.class)))
+                .thenReturn(70L);
+
+        double result = attendanceServiceImpl.getAverageDailyAttendance();
+
+        int expectedDaysElapsed = LocalDate.now().getDayOfMonth();
+        double expected = 70.0 / expectedDaysElapsed;
+        assertEquals(expected, result, 0.0001); // delta para comparacion de doubles
+    }
+
+    @Test
+    void getAverageDailyAttendance_shouldReturnZero_whenNoAttendances() {
+        when(attendanceRepository.countByAttendanceDateBetween(any(LocalDate.class), any(LocalDate.class)))
+                .thenReturn(0L);
+
+        double result = attendanceServiceImpl.getAverageDailyAttendance();
+
+        assertEquals(0.0, result, 0.0001);
     }
 
 }

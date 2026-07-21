@@ -11,6 +11,8 @@ public interface MemberService {
 
     Optional<Member> findById(Long id);
 
+    Optional<Member> findByDni(String dni);
+
     Member save(Member member);
 
     Member update(Long id, Member member);
