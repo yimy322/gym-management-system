@@ -1,15 +1,15 @@
 package com.gymmanagement.gym.services;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +28,6 @@ import com.gymmanagement.gym.repository.MemberRepository;
 import com.gymmanagement.gym.repository.MembershipRepository;
 import com.gymmanagement.gym.repository.SubscriptionRepository;
 import com.gymmanagement.gym.services.impl.SubscriptionServiceImpl;
-import com.gymmanagement.gym.utils.SubscriptionStatus;
 
 @ExtendWith(MockitoExtension.class)
 public class SubscriptionServiceTest {
@@ -64,52 +63,7 @@ public class SubscriptionServiceTest {
         subscription.setMembership(membership);
         subscription.setStartDate(LocalDate.now());
         subscription.setEndDate(LocalDate.now().plusMonths(1));
-        subscription.setStatus(SubscriptionStatus.ACTIVE);
-    }
-
-    @Test
-    void assignMembership_whenValidData_shouldSaveSubscription() {
-        when(memberRepository.findById(1L)).thenReturn(Optional.of(member));
-        when(membershipRepository.findById(1L)).thenReturn(Optional.of(membership));
-        when(subscriptionRepository.findByMemberAndStatus(member, SubscriptionStatus.ACTIVE))
-                .thenReturn(Optional.empty());
-        when(subscriptionRepository.save(any(Subscription.class))).thenReturn(subscription);
-        Subscription result = subscriptionServiceImpl.assignMembership(1L, 1L);
-        assertNotNull(result);
-        assertEquals(SubscriptionStatus.ACTIVE, result.getStatus());
-        verify(subscriptionRepository, times(1)).save(any(Subscription.class));
-    }
-
-    @Test
-    void assignMembership_whenMemberNotFound_shouldThrowException() {
-        when(memberRepository.findById(99L)).thenReturn(Optional.empty());
-        RuntimeException ex = assertThrows(RuntimeException.class, () ->
-                subscriptionServiceImpl.assignMembership(99L, 1L));
-        assertEquals("Afiliado no encontrado", ex.getMessage());
-        verify(subscriptionRepository, never()).save(any());
-    }
-
-    @Test
-    void assignMembership_whenAlreadyHasActiveMembership_shouldThrowException() {
-        when(memberRepository.findById(1L)).thenReturn(Optional.of(member));
-        when(membershipRepository.findById(1L)).thenReturn(Optional.of(membership));
-        when(subscriptionRepository.findByMemberAndStatus(member, SubscriptionStatus.ACTIVE))
-                .thenReturn(Optional.of(subscription)); //ya tiene una activa
-        RuntimeException ex = assertThrows(RuntimeException.class, () ->
-                subscriptionServiceImpl.assignMembership(1L, 1L));
-        assertEquals("El afiliado ya cuenta con una membresía activa", ex.getMessage());
-        verify(subscriptionRepository, never()).save(any());
-    }
-
-    @Test
-    void updateExpiredSubscriptions_whenSubscriptionExpired_shouldSetInactive() {
-        subscription.setEndDate(LocalDate.now().minusDays(1)); //vencio ayer
-        subscription.setStatus(SubscriptionStatus.ACTIVE);
-        when(subscriptionRepository.findByStatus(SubscriptionStatus.ACTIVE))
-                .thenReturn(List.of(subscription));
-        subscriptionServiceImpl.updateExpiredSubscriptions();
-        assertEquals(SubscriptionStatus.INACTIVE, subscription.getStatus());
-        verify(subscriptionRepository, times(1)).save(subscription);
+        subscription.setStatus(true);
     }
 
     //READ ALL
@@ -119,6 +73,99 @@ public class SubscriptionServiceTest {
         List<Subscription> result = subscriptionServiceImpl.findAll();
         assertFalse(result.isEmpty());
         verify(subscriptionRepository, times(1)).findAll();
+    }
+
+    @Test
+    void findByMemberAndStatusTrue_shouldReturnActiveSubscription_whenExists() {
+        when(subscriptionRepository.findByMemberAndStatusTrue(member))
+                .thenReturn(Optional.of(subscription));
+
+        Optional<Subscription> result = subscriptionServiceImpl.findByMemberAndStatusTrue(member);
+
+        assertTrue(result.isPresent());
+        assertEquals(subscription, result.get());
+    }
+
+    @Test
+    void findByMemberAndStatusTrue_shouldReturnEmpty_whenNoActiveSubscription() {
+        when(subscriptionRepository.findByMemberAndStatusTrue(member))
+                .thenReturn(Optional.empty());
+
+        Optional<Subscription> result = subscriptionServiceImpl.findByMemberAndStatusTrue(member);
+
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void assign_shouldDeactivatePreviousSubscription_whenMemberHasActiveOne() {
+        Subscription previousActive = new Subscription();
+        previousActive.setId(99L);
+        previousActive.setStatus(true);
+
+        when(subscriptionRepository.findByMemberAndStatusTrue(member))
+                .thenReturn(Optional.of(previousActive));
+        when(subscriptionRepository.save(any(Subscription.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        Subscription result = subscriptionServiceImpl.assign(member, membership);
+
+        // la anterior debe haberse desactivado y guardado
+        assertFalse(previousActive.getStatus());
+        verify(subscriptionRepository).save(previousActive);
+
+        // la nueva debe estar correctamente armada
+        assertEquals(member, result.getMember());
+        assertEquals(membership, result.getMembership());
+        assertEquals(LocalDate.now(), result.getStartDate());
+        assertEquals(LocalDate.now().plusMonths(membership.getDurationMonths()), result.getEndDate());
+
+        verify(subscriptionRepository, times(2)).save(any(Subscription.class));
+    }
+
+    @Test
+    void assign_shouldCreateNewSubscription_whenMemberHasNoActiveOne() {
+        when(subscriptionRepository.findByMemberAndStatusTrue(member))
+                .thenReturn(Optional.empty());
+        when(subscriptionRepository.save(any(Subscription.class)))
+                .thenAnswer(invocation -> invocation.getArgument(0));
+
+        Subscription result = subscriptionServiceImpl.assign(member, membership);
+
+        assertEquals(member, result.getMember());
+        assertEquals(membership, result.getMembership());
+        verify(subscriptionRepository, times(1)).save(any(Subscription.class));
+    }
+
+    @Test
+    void getTotalIncome_shouldReturnSumFromRepository() {
+        when(subscriptionRepository.sumAllIncome()).thenReturn(new BigDecimal("1500.00"));
+        BigDecimal result = subscriptionServiceImpl.getTotalIncome();
+        assertThat(result).isEqualByComparingTo("1500.00");
+    }
+
+    @Test
+    void countExpiredSubscriptions_shouldReturnCountFromRepository() {
+        when(subscriptionRepository.countByStatusTrueAndEndDateBefore(any(LocalDate.class)))
+                .thenReturn(3L);
+
+        long result = subscriptionServiceImpl.countExpiredSubscriptions();
+        assertEquals(3L, result);
+    }
+
+    @Test
+    void getMostSoldPlanName_shouldReturnFirstResult_whenResultsExist() {
+        when(subscriptionRepository.findMostSoldPlanNames())
+                .thenReturn(List.of("Plan Basico", "Plan Premium"));
+        String result = subscriptionServiceImpl.getMostSoldPlanName();
+        assertEquals("Plan Basico", result);
+    }
+
+    @Test
+    void getMostSoldPlanName_shouldReturnDefaultMessage_whenNoResults() {
+        when(subscriptionRepository.findMostSoldPlanNames())
+                .thenReturn(List.of());
+        String result = subscriptionServiceImpl.getMostSoldPlanName();
+        assertEquals("Sin datos", result);
     }
 
 }

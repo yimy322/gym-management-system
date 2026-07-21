@@ -14,7 +14,6 @@ public class MembershipMapper {
         membership.setName(dto.getName());
         membership.setDurationMonths(dto.getDurationMonths());
         membership.setPrice(dto.getPrice());
-        membership.setStatus(dto.getStatus());
         return membership;
     }
 

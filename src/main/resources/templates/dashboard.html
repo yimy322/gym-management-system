@@ -48,7 +48,7 @@
                 <div class="bg-white rounded p-3 h-100" style="border-top: 3px solid #dc3545;">
                     <small class="text-uppercase text-muted fw-semibold" style="font-size: 10px;">Afiliaciones Vencidas</small>
                     <div class="d-flex justify-content-between align-items-center mt-2">
-                        <h4 class="fw-bold mb-0">0</h4>
+                        <h4 class="fw-bold mb-0" th:text="${countExpiredSubscriptions}">0</h4>
                         <i class="fa-regular fa-circle-xmark fa-xl text-muted"></i>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                 <div class="bg-white rounded p-3 h-100" style="border-top: 3px solid #0d6efd;">
                     <small class="text-uppercase text-muted fw-semibold" style="font-size: 10px;">Prom. Asistencia Diaria</small>
                     <div class="d-flex justify-content-between align-items-center mt-2">
-                        <h4 class="fw-bold mb-0">3.65</h4>
+                        <h4 class="fw-bold mb-0" th:text="${avgDailyAttendance}">0</h4>
                         <i class="fa-solid fa-chart-line fa-xl text-muted"></i>
                     </div>
                 </div>
